@@ -19,14 +19,15 @@ final class MarvelCharacterListCoordinator: BaseCoordinator, MarvelCharacterList
     }
 
     public func start(animated: Bool = true) {
-        let environment = MarvelEnvironment()
-       	let networkService = AsyncAwaitNetworkService(environment: environment)
-       	let repository = MarvelDataRepository(networkService: networkService)
-       	let useCase = MarvelCharacterListUseCase(marvelRepository: repository)
+        guard let marvelCharacterListUseCase = DependencyManager.shared
+            .resolve(MarvelCharacterListUseCase.self)
+        else {
+            preconditionFailure("MarvelCharacterListUseCase dependencies not found")
+        }
 
-       	let viewModel = MarvelCharacterListViewModel(charactersUseCase: useCase)
-        let startViewController = MarvelCharacterListViewController(viewModel: viewModel, coordinator: self)
-        navigationController.pushViewController(startViewController, animated: animated)
+        let viewModel = MarvelCharacterListViewModel(charactersUseCase: marvelCharacterListUseCase)
+        let characterListViewController = MarvelCharacterListViewController(viewModel: viewModel, coordinator: self)
+        navigationController.pushViewController(characterListViewController, animated: animated)
     }
 
     // MARK: - Flow Methods

@@ -8,16 +8,21 @@
 import Foundation
 import Combine
 
-protocol MarveCharacterListViewModelProtocol {
+protocol MarvelCharacterListViewModelProtocol {
     var dataSource: [MarvelCharacter] { get }
     var dataSourcePublisher: Published<[MarvelCharacter]>.Publisher { get }
+    var errorMsg: String { get }
+    var errorMsgPublisher: Published<String>.Publisher { get }
     func fetchCharacters()
 }
 
 
-class MarvelCharacterListViewModel: MarveCharacterListViewModelProtocol {
+class MarvelCharacterListViewModel: MarvelCharacterListViewModelProtocol {
     @Published public var dataSource: [MarvelCharacter] = []
     public var dataSourcePublisher: Published<[MarvelCharacter]>.Publisher { $dataSource }
+
+    @Published public var errorMsg: String = ""
+    public var errorMsgPublisher: Published<String>.Publisher { $errorMsg }
 
     private let charactersUseCase: MarvelCharacterListUseCaseProtocol
 
@@ -33,6 +38,7 @@ class MarvelCharacterListViewModel: MarveCharacterListViewModelProtocol {
         if !mustSearch { return }
         Task { @MainActor in
             let result = try await charactersUseCase.execute(offset: offset)
+
             switch result {
             case let .success(characters):
                 if characters.isEmpty {
@@ -40,8 +46,9 @@ class MarvelCharacterListViewModel: MarveCharacterListViewModelProtocol {
                 }
                 offset += characters.count
                 dataSource.append(contentsOf: characters)
+                errorMsg = ""
             case let .failure(error):
-                NSLog("\(error.localizedDescription)")
+                errorMsg = error.errorDescription
             }
         }
     }

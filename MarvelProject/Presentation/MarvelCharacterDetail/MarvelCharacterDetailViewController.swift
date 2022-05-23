@@ -160,6 +160,16 @@ extension MarvelCharacterDetailViewController {
                 self.update(with: character)
             }
             .store(in: &cancellables)
+
+        viewModel.errorMsgPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in
+                guard let self = self else { return }
+                if !self.viewModel.errorMsg.isEmpty {
+                    self.showMessage(title: "Error", msg: self.viewModel.errorMsg)
+                }
+            }
+            .store(in: &cancellables)
     }
 
     private func fetchData() {

@@ -53,6 +53,11 @@
 		646F07002837B274009B4D34 /* MarvelCharacterDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646F06FF2837B274009B4D34 /* MarvelCharacterDetailUseCase.swift */; };
 		646F07022837D424009B4D34 /* MarvelConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646F07012837D424009B4D34 /* MarvelConstants.swift */; };
 		646F07042837D74B009B4D34 /* BaseMarvelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646F07032837D74B009B4D34 /* BaseMarvelController.swift */; };
+		648EB573283BC4120057BAEF /* OHHTTPStubs in Frameworks */ = {isa = PBXBuildFile; productRef = 648EB572283BC4120057BAEF /* OHHTTPStubs */; };
+		648EB575283BC4120057BAEF /* OHHTTPStubsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 648EB574283BC4120057BAEF /* OHHTTPStubsSwift */; };
+		648EB578283BCBFA0057BAEF /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 648EB577283BCBFA0057BAEF /* Swinject */; };
+		648EB57B283BCC5D0057BAEF /* DependencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648EB57A283BCC5D0057BAEF /* DependencyManager.swift */; };
+		648EB57D283BCCA10057BAEF /* AppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648EB57C283BCCA10057BAEF /* AppDependencies.swift */; };
 		64B24ED4283B7CAE00CF4B23 /* ImageCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B24ED3283B7CAE00CF4B23 /* ImageCacheTests.swift */; };
 		64B24ED8283B800400CF4B23 /* MarvelAuthHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B24ED7283B800400CF4B23 /* MarvelAuthHelperTests.swift */; };
 		64B24EDC283B855600CF4B23 /* MarvelCharacterEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B24EDB283B855600CF4B23 /* MarvelCharacterEndpointTests.swift */; };
@@ -131,6 +136,8 @@
 		646F06FF2837B274009B4D34 /* MarvelCharacterDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelCharacterDetailUseCase.swift; sourceTree = "<group>"; };
 		646F07012837D424009B4D34 /* MarvelConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelConstants.swift; sourceTree = "<group>"; };
 		646F07032837D74B009B4D34 /* BaseMarvelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseMarvelController.swift; sourceTree = "<group>"; };
+		648EB57A283BCC5D0057BAEF /* DependencyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyManager.swift; sourceTree = "<group>"; };
+		648EB57C283BCCA10057BAEF /* AppDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependencies.swift; sourceTree = "<group>"; };
 		64B24ED3283B7CAE00CF4B23 /* ImageCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheTests.swift; sourceTree = "<group>"; };
 		64B24ED7283B800400CF4B23 /* MarvelAuthHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelAuthHelperTests.swift; sourceTree = "<group>"; };
 		64B24EDB283B855600CF4B23 /* MarvelCharacterEndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelCharacterEndpointTests.swift; sourceTree = "<group>"; };
@@ -159,6 +166,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				648EB575283BC4120057BAEF /* OHHTTPStubsSwift in Frameworks */,
+				648EB573283BC4120057BAEF /* OHHTTPStubs in Frameworks */,
+				648EB578283BCBFA0057BAEF /* Swinject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,6 +222,7 @@
 				64009D402833B97F00F874C5 /* Assets.xcassets */,
 				644B4097283653780097BE92 /* LaunchScreen.storyboard */,
 				64009D452833B97F00F874C5 /* Info.plist */,
+				648EB57C283BCCA10057BAEF /* AppDependencies.swift */,
 			);
 			path = MarvelProject;
 			sourceTree = "<group>";
@@ -259,6 +270,7 @@
 		644B40442833BFC20097BE92 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				648EB579283BCC4D0057BAEF /* Dependency */,
 				646F06EF28379322009B4D34 /* Cache */,
 				64E69FE9283696BB002CCD4C /* Coordinators */,
 				644B407528353DA70097BE92 /* Helpers */,
@@ -413,6 +425,14 @@
 				646F06FB2837AD7D009B4D34 /* MarvelComicListCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		648EB579283BCC4D0057BAEF /* Dependency */ = {
+			isa = PBXGroup;
+			children = (
+				648EB57A283BCC5D0057BAEF /* DependencyManager.swift */,
+			);
+			path = Dependency;
 			sourceTree = "<group>";
 		};
 		64B24ED2283B7C9E00CF4B23 /* Core */ = {
@@ -588,6 +608,9 @@
 			);
 			name = MarvelProject;
 			packageProductDependencies = (
+				648EB572283BC4120057BAEF /* OHHTTPStubs */,
+				648EB574283BC4120057BAEF /* OHHTTPStubsSwift */,
+				648EB577283BCBFA0057BAEF /* Swinject */,
 			);
 			productName = MarvelProject;
 			productReference = 64009D342833B97E00F874C5 /* MarvelProject.app */;
@@ -665,6 +688,8 @@
 			);
 			mainGroup = 64009D2B2833B97D00F874C5;
 			packageReferences = (
+				648EB571283BC4120057BAEF /* XCRemoteSwiftPackageReference "OHHTTPStubs" */,
+				648EB576283BCBFA0057BAEF /* XCRemoteSwiftPackageReference "Swinject" */,
 			);
 			productRefGroup = 64009D352833B97E00F874C5 /* Products */;
 			projectDirPath = "";
@@ -746,6 +771,7 @@
 				646F06F72837A970009B4D34 /* MarvelCharacterDetailViewController.swift in Sources */,
 				64E69FEF283696FD002CCD4C /* StartCoordinator.swift in Sources */,
 				644B408C2836287F0097BE92 /* NetworkEndpointProtocol.swift in Sources */,
+				648EB57B283BCC5D0057BAEF /* DependencyManager.swift in Sources */,
 				644B407928353E4C0097BE92 /* String.swift in Sources */,
 				64E69FEB283696BC002CCD4C /* BaseCoordinator.swift in Sources */,
 				644B408E28362AC90097BE92 /* NetworkServiceLogger.swift in Sources */,
@@ -754,6 +780,7 @@
 				644B407E28357C630097BE92 /* MarvelCharacterListUseCase.swift in Sources */,
 				64009D382833B97E00F874C5 /* AppDelegate.swift in Sources */,
 				64E69FED283696E1002CCD4C /* MainCoordinator.swift in Sources */,
+				648EB57D283BCCA10057BAEF /* AppDependencies.swift in Sources */,
 				64E69FE728368128002CCD4C /* UIImageView.swift in Sources */,
 				64E69FE528368037002CCD4C /* MarvelCharacterListCell.swift in Sources */,
 				644B409628362EEC0097BE92 /* MarvelCharacterListViewModel.swift in Sources */,
@@ -1127,6 +1154,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		648EB571283BC4120057BAEF /* XCRemoteSwiftPackageReference "OHHTTPStubs" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AliSoftware/OHHTTPStubs.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		648EB576283BCBFA0057BAEF /* XCRemoteSwiftPackageReference "Swinject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Swinject/Swinject.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		648EB572283BC4120057BAEF /* OHHTTPStubs */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 648EB571283BC4120057BAEF /* XCRemoteSwiftPackageReference "OHHTTPStubs" */;
+			productName = OHHTTPStubs;
+		};
+		648EB574283BC4120057BAEF /* OHHTTPStubsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 648EB571283BC4120057BAEF /* XCRemoteSwiftPackageReference "OHHTTPStubs" */;
+			productName = OHHTTPStubsSwift;
+		};
+		648EB577283BCBFA0057BAEF /* Swinject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 648EB576283BCBFA0057BAEF /* XCRemoteSwiftPackageReference "Swinject" */;
+			productName = Swinject;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 64009D2C2833B97D00F874C5 /* Project object */;
 }

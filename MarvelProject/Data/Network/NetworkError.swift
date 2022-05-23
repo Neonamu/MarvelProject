@@ -10,4 +10,19 @@ public enum NetworkError: Error, Equatable {
     case httpError(Int)
     case invalidURL
     case unknown
+
+    public var errorDescription: String {
+        switch self {
+        case .unknown:
+            return "Unknown error"
+        case .invalidURL:
+            return "Invalid URL"
+        case .decodingError:
+            return "Error decoding data"
+        case let .httpError(numError):
+            return "HTTP Error \(numError)"
+        @unknown default:
+            return "Unknown error"
+        }
+    }
 }

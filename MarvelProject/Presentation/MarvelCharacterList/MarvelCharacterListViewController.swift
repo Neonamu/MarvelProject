@@ -12,7 +12,7 @@ public final class MarvelCharacterListViewController: BaseMarvelController {
     // MARK: - Properties
     private var cancellables = Set<AnyCancellable>()
 
-    private let viewModel: MarvelCharacterListViewModel
+    private let viewModel: MarvelCharacterListViewModelProtocol
     private let coordinator: MarvelCharacterListCoordinatorProtocol?
     private lazy var dataSource = makeDataSource()
 
@@ -29,7 +29,7 @@ public final class MarvelCharacterListViewController: BaseMarvelController {
     }()
 
     // MARK: - Initializer
-    init(viewModel: MarvelCharacterListViewModel,
+    init(viewModel: MarvelCharacterListViewModelProtocol,
          coordinator: MarvelCharacterListCoordinatorProtocol? = nil) {
         self.viewModel = viewModel
         self.coordinator = coordinator
@@ -74,6 +74,16 @@ extension MarvelCharacterListViewController {
             .sink { [weak self] _ in
                 guard let self = self else { return }
                 self.update(with: self.viewModel.dataSource)
+            }
+            .store(in: &cancellables)
+
+        viewModel.errorMsgPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in
+                guard let self = self else { return }
+                if !self.viewModel.errorMsg.isEmpty {
+                    self.showMessage(title: "Error", msg: self.viewModel.errorMsg)
+                }
             }
             .store(in: &cancellables)
     }

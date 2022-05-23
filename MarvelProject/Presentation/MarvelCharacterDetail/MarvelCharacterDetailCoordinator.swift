@@ -21,12 +21,13 @@ final class MarvelCharacterDetailCoordinator: BaseCoordinator, MarvelCharacterDe
     }
 
     public func start(animated: Bool = true) {
-        let environment = MarvelEnvironment()
-        let networkService = AsyncAwaitNetworkService(environment: environment)
-        let repository = MarvelDataRepository(networkService: networkService)
-        let useCase = MarvelCharacterDetailUseCase(marvelRepository: repository)
+        guard let marvelCharacterDetailtUseCase = DependencyManager.shared
+            .resolve(MarvelCharacterDetailUseCase.self)
+        else {
+            preconditionFailure("MarvelCharacterDetailUseCase dependencies not found")
+        }
 
-        let viewModel = MarvelCharacterDetailViewModel(characterDetailUseCase: useCase, identifier: identifier)
+        let viewModel = MarvelCharacterDetailViewModel(characterDetailUseCase: marvelCharacterDetailtUseCase, identifier: identifier)
         let detailViewController = MarvelCharacterDetailViewController(viewModel: viewModel, coordinator: self)
         navigationController.pushViewController(detailViewController, animated: animated)
     }

@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import OHHTTPStubs
+import OHHTTPStubsSwift
 
 public protocol AsyncAwaitNetworkServiceProtocol {
     func request<T: Decodable>(with endpoint: NetworkEndpointProtocol) async throws -> T
@@ -14,11 +16,12 @@ public protocol AsyncAwaitNetworkServiceProtocol {
 
 public final class AsyncAwaitNetworkService: NSObject, AsyncAwaitNetworkServiceProtocol {
     let environment: NetworkEnvironmentProtocol
-    let logger = NetworkServiceLogger()
+    let logger: NetworkServiceLoggerProtocol
     private lazy var session: URLSession = .init(configuration: .default, delegate: self, delegateQueue: nil)
 
-    public init(environment: NetworkEnvironmentProtocol) {
+    public init(environment: NetworkEnvironmentProtocol, logger: NetworkServiceLoggerProtocol) {
         self.environment = environment
+        self.logger = logger
         super.init()
     }
 
@@ -62,7 +65,7 @@ public final class AsyncAwaitNetworkService: NSObject, AsyncAwaitNetworkServiceP
         }
 
         guard response.value(forHTTPHeaderField: "Content-Type") == "image/png" ||
-            response.value(forHTTPHeaderField: "Content-Type") == "image/jpg"
+                response.value(forHTTPHeaderField: "Content-Type") == "image/jpg"
         else {
             throw NetworkError.decodingError
         }
@@ -100,6 +103,9 @@ private extension AsyncAwaitNetworkService {
 
     func activateStubModeIfNeeded(_ endpoint: NetworkEndpointProtocol) {
         guard environment.stubMode else { return }
+        stub(condition: isPath(endpoint.path)) { _ in
+            HTTPStubsResponse(fileAtPath: endpoint.stubPath, statusCode: 200, headers: nil)
+        }
     }
 
     func logRequestIfNeeded(_ urlRequest: URLRequest) {

@@ -11,14 +11,18 @@ import Combine
 protocol MarvelCharacterDetailViewModelProtocol {
     var dataSource: MarvelCharacter? { get }
     var dataSourcePublisher: Published<MarvelCharacter?>.Publisher { get }
+    var errorMsg: String { get }
+    var errorMsgPublisher: Published<String>.Publisher { get }
     func fetchCharacter()
 }
 
 
 class MarvelCharacterDetailViewModel: MarvelCharacterDetailViewModelProtocol {
     @Published public var dataSource: MarvelCharacter?
-    public var dataSourcePublished: Published<MarvelCharacter?> { _dataSource }
     public var dataSourcePublisher: Published<MarvelCharacter?>.Publisher { $dataSource }
+
+    @Published public var errorMsg: String = ""
+    public var errorMsgPublisher: Published<String>.Publisher { $errorMsg }
 
     private let characterDetailUseCase: MarvelCharacterDetailUseCaseProtocol
 
@@ -36,8 +40,9 @@ class MarvelCharacterDetailViewModel: MarvelCharacterDetailViewModelProtocol {
             switch result {
             case let .success(character):
                 dataSource = character
+                errorMsg = ""
             case let .failure(error):
-                NSLog("\(error.localizedDescription)")
+                errorMsg = error.errorDescription
             }
         }
     }
