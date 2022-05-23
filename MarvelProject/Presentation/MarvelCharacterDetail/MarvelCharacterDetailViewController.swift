@@ -163,7 +163,7 @@ extension MarvelCharacterDetailViewController {
     }
 
     private func fetchData() {
-        viewModel.fetchData()
+        viewModel.fetchCharacter()
     }
 }
 

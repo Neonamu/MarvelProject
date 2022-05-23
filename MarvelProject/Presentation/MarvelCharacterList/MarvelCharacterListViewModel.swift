@@ -10,7 +10,6 @@ import Combine
 
 protocol MarveCharacterListViewModelProtocol {
     var dataSource: [MarvelCharacter] { get }
-    var dataSourcePublished: Published<[MarvelCharacter]> { get }
     var dataSourcePublisher: Published<[MarvelCharacter]>.Publisher { get }
     func fetchCharacters()
 }
@@ -18,12 +17,12 @@ protocol MarveCharacterListViewModelProtocol {
 
 class MarvelCharacterListViewModel: MarveCharacterListViewModelProtocol {
     @Published public var dataSource: [MarvelCharacter] = []
-    public var dataSourcePublished: Published<[MarvelCharacter]> { _dataSource }
     public var dataSourcePublisher: Published<[MarvelCharacter]>.Publisher { $dataSource }
 
     private let charactersUseCase: MarvelCharacterListUseCaseProtocol
 
     private var offset: Int = 0
+    private var mustSearch = true
 
     public init (charactersUseCase: MarvelCharacterListUseCaseProtocol) {
         self.charactersUseCase = charactersUseCase
@@ -31,10 +30,14 @@ class MarvelCharacterListViewModel: MarveCharacterListViewModelProtocol {
 
 
     func fetchCharacters() {
+        if !mustSearch { return }
         Task { @MainActor in
             let result = try await charactersUseCase.execute(offset: offset)
             switch result {
             case let .success(characters):
+                if characters.count == 0 {
+                    mustSearch = false
+                }
                 offset += characters.count
                 dataSource.append(contentsOf: characters)
             case let .failure(error):

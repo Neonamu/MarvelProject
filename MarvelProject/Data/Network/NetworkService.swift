@@ -6,8 +6,6 @@
 //
 
 import Foundation
-import OHHTTPStubs
-import OHHTTPStubsSwift
 
 public protocol AsyncAwaitNetworkServiceProtocol {
     func request<T: Decodable>(with endpoint: NetworkEndpointProtocol) async throws -> T
@@ -102,9 +100,6 @@ private extension AsyncAwaitNetworkService {
 
     func activateStubModeIfNeeded(_ endpoint: NetworkEndpointProtocol) {
         guard environment.stubMode else { return }
-        stub(condition: isPath(endpoint.path)) { _ in
-            HTTPStubsResponse(fileAtPath: endpoint.stubPath, statusCode: 200, headers: nil)
-        }
     }
 
     func logRequestIfNeeded(_ urlRequest: URLRequest) {

@@ -8,7 +8,7 @@
 import Foundation
 
 
-class ImageCache {
+public class ImageCache {
     public static let shared = ImageCache()
     private var dictImages: [String: Data]
 
@@ -16,14 +16,18 @@ class ImageCache {
         dictImages = [:]
     }
 
-    func save (url: String, data: Data) {
+    public func save (url: String, data: Data) {
         dictImages[url] = data
     }
 
-    func get (url: String) -> Data? {
+    public func get (url: String) -> Data? {
         guard let result = dictImages[url] else {
             return nil
         }
         return result
+    }
+    
+    public func remove (url: String){
+        dictImages.removeValue(forKey: url)
     }
 }

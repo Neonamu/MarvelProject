@@ -10,9 +10,8 @@ import Combine
 
 protocol MarvelCharacterDetailViewModelProtocol {
     var dataSource: MarvelCharacter? { get }
-    var dataSourcePublished: Published<MarvelCharacter?> { get }
     var dataSourcePublisher: Published<MarvelCharacter?>.Publisher { get }
-    func fetchData()
+    func fetchCharacter()
 }
 
 
@@ -31,7 +30,7 @@ class MarvelCharacterDetailViewModel: MarvelCharacterDetailViewModelProtocol {
     }
 
 
-    func fetchData() {
+    func fetchCharacter() {
         Task { @MainActor in
             let result = try await characterDetailUseCase.execute(identifier: identifier)
             switch result {
