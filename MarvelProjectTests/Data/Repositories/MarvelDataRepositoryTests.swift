@@ -114,8 +114,8 @@ private extension MarvelDataRepositoryTests {
                                 name: "comic2")],
                         returned: 2))]))
     }
-    
-    func getMarvelResponseMock() -> MarvelResponseDTO{
+
+    func getMarvelResponseMock() -> MarvelResponseDTO {
         MarvelResponseDTO(
             code: 200,
             status: "ok",
