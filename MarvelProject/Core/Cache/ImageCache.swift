@@ -26,8 +26,8 @@ public class ImageCache {
         }
         return result
     }
-    
-    public func remove (url: String){
+
+    public func remove (url: String) {
         dictImages.removeValue(forKey: url)
     }
 }

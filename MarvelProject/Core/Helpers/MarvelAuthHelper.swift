@@ -13,8 +13,8 @@ public struct MarvelAuthParams: Encodable {
     var apikey: String
 }
 
-public class MarvelAuthHelper {
-    public static func generateCredentials(publicKey: String, privateKey: String, ts : String = String(Date().timeIntervalSince1970)) -> MarvelAuthParams {
+public enum MarvelAuthHelper {
+    public static func generateCredentials(publicKey: String, privateKey: String, ts: String = String(Date().timeIntervalSince1970)) -> MarvelAuthParams {
         let hash = "\(ts)\(privateKey)\(publicKey)".md5
         return MarvelAuthParams(ts: ts, hash: hash, apikey: publicKey)
     }

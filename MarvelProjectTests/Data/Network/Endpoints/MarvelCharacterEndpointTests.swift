@@ -8,18 +8,18 @@
 @testable import MarvelProject
 import XCTest
 
-class MarvelCharacterEndpointTests: XCTestCase{
-    private var sut : MarvelCharactersEndpoint!
-    
+class MarvelCharacterEndpointTests: XCTestCase {
+    private var sut: MarvelCharactersEndpoint!
+
     override func setUp() {
         super.setUp()
         sut = MarvelCharactersEndpoint()
     }
-    
-    func testInit(){
+
+    func testInit() {
         XCTAssertNotNil(sut)
     }
-    
+
     func testProperties() {
         // When
         let offset = 0

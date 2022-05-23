@@ -7,15 +7,14 @@
 
 @testable import MarvelProject
 
-final class MarvelDataRepositoryMock: MarvelDataRepositoryProtocol{
-
+final class MarvelDataRepositoryMock: MarvelDataRepositoryProtocol {
     var invokedGetMarvelCharacters = false
     var invokedGetMarvelCharactersCount = 0
     var invokedGetMarvelCharactersParameters: (offset: Int, Void)?
     var invokedGetMarvelCharactersParametersList = [(offset: Int, Void)]()
     var stubbedGetMarvelCharactersResult: Result<[MarvelCharacter], NetworkError>!
 
-    func getMarvelCharacters(offset: Int) async throws  -> Result<[MarvelCharacter], NetworkError> {
+    func getMarvelCharacters(offset: Int) async throws -> Result<[MarvelCharacter], NetworkError> {
         invokedGetMarvelCharacters = true
         invokedGetMarvelCharactersCount += 1
         invokedGetMarvelCharactersParameters = (offset, ())

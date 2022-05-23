@@ -8,19 +8,19 @@
 @testable import MarvelProject
 import XCTest
 
-class MarvelEnvironmentTests: XCTestCase{
-    private var sut : MarvelEnvironment!
-    
+class MarvelEnvironmentTests: XCTestCase {
+    private var sut: MarvelEnvironment!
+
     override func setUp() {
         super.setUp()
         sut = MarvelEnvironment()
     }
-    
-    func testInit(){
+
+    func testInit() {
         XCTAssertNotNil(sut)
     }
-    
-    func testProperties(){
+
+    func testProperties() {
         XCTAssertEqual(sut.baseURL, "https://gateway.marvel.com")
         XCTAssertEqual(sut.timeoutInterval, 10.0)
         XCTAssertEqual(sut.logMode, true)

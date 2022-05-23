@@ -9,27 +9,24 @@ import XCTest
 @testable import MarvelProject
 
 
-class MarvelAuthHelperTests: XCTestCase{
-    
+class MarvelAuthHelperTests: XCTestCase {
     override func setUp() {
         super.setUp()
     }
-    
-    func testCredentials(){
+
+    func testCredentials() {
         // Given
         let publicKey = "testPK"
         let privateKey = "testPrivateKey"
         let ts = String(Date().timeIntervalSince1970)
-        
+
         // When
         let marvelAuth = MarvelAuthHelper.generateCredentials(publicKey: publicKey, privateKey: privateKey, ts: ts)
         let hash = "\(ts)\(privateKey)\(publicKey)".md5
-        
-        //Then
+
+        // Then
         XCTAssertEqual(marvelAuth.hash, hash)
         XCTAssertEqual(marvelAuth.ts, ts)
         XCTAssertEqual(marvelAuth.apikey, publicKey)
-        
     }
 }
-

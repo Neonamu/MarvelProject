@@ -7,8 +7,7 @@
 
 @testable import MarvelProject
 
-final class MarvelCharacterDetailUseCaseMock: MarvelCharacterDetailUseCaseProtocol{
-
+final class MarvelCharacterDetailUseCaseMock: MarvelCharacterDetailUseCaseProtocol {
     var invokedExecute = false
     var invokedExecuteCount = 0
     var invokedExecuteParameters: (identifier: Int, Void)?

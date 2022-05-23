@@ -35,7 +35,7 @@ class MarvelCharacterListViewModel: MarveCharacterListViewModelProtocol {
             let result = try await charactersUseCase.execute(offset: offset)
             switch result {
             case let .success(characters):
-                if characters.count == 0 {
+                if characters.isEmpty {
                     mustSearch = false
                 }
                 offset += characters.count

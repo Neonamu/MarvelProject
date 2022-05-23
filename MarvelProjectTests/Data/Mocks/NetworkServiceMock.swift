@@ -8,9 +8,7 @@
 import Foundation
 @testable import MarvelProject
 
-final class NetworkServiceMock : AsyncAwaitNetworkServiceProtocol{
-    
-
+final class NetworkServiceMock: AsyncAwaitNetworkServiceProtocol {
     var invokedRequest = false
     var invokedRequestCount = 0
     var invokedRequestParameters: (endpoint: NetworkEndpointProtocol, Void)?
@@ -23,7 +21,7 @@ final class NetworkServiceMock : AsyncAwaitNetworkServiceProtocol{
         invokedRequestCount += 1
         invokedRequestParameters = (endpoint, ())
         invokedRequestParametersList.append((endpoint, ()))
-        
+
         if let invokedRequestError = invokedRequestError {
             throw invokedRequestError
         }

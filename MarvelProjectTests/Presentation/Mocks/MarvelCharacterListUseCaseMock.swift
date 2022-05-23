@@ -7,15 +7,14 @@
 
 @testable import MarvelProject
 
-final class MarvelCharacterListUseCaseMock: MarvelCharacterListUseCaseProtocol{
-
+final class MarvelCharacterListUseCaseMock: MarvelCharacterListUseCaseProtocol {
     var invokedExecute = false
     var invokedExecuteCount = 0
     var invokedExecuteParameters: (offset: Int, Void)?
     var invokedExecuteParametersList = [(offset: Int, Void)]()
     var stubbedExecuteResult: Result<[MarvelCharacter], NetworkError>!
 
-    func execute(offset: Int) async throws  -> Result<[MarvelCharacter], NetworkError> {
+    func execute(offset: Int) async throws -> Result<[MarvelCharacter], NetworkError> {
         invokedExecute = true
         invokedExecuteCount += 1
         invokedExecuteParameters = (offset, ())
