@@ -9,32 +9,32 @@
 import XCTest
 import Combine
 
-class MarvelCharacterDetailViewModelTests: XCTestCase{
+class MarvelCharacterDetailViewModelTests: XCTestCase {
     private var sut: MarvelCharacterDetailViewModel!
-    private var marvelDetailUseCase : MarvelCharacterDetailUseCaseMock!
+    private var marvelDetailUseCase: MarvelCharacterDetailUseCaseMock!
     private var identifier = 1
     private var cancellables = Set<AnyCancellable>()
-    
+
     override func setUp() {
         super.setUp()
         marvelDetailUseCase = MarvelCharacterDetailUseCaseMock()
         sut = MarvelCharacterDetailViewModel(characterDetailUseCase: marvelDetailUseCase, identifier: identifier)
     }
-    
-    func testInit(){
+
+    func testInit() {
         XCTAssertNotNil(sut)
     }
-    
-    func testFetchCharacter(){
+
+    func testFetchCharacter() {
         // Given
         let charactersMock = getCharacterMock()
         marvelDetailUseCase.stubbedExecuteResult = .success(charactersMock)
         XCTAssertNil(sut.dataSource)
         let exp = expectation(description: "fetchCharacter")
-        
+
         // When
         sut.fetchCharacter()
-        
+
         // then
         sut.dataSourcePublisher
             .receive(on: RunLoop.main)
@@ -46,12 +46,12 @@ class MarvelCharacterDetailViewModelTests: XCTestCase{
                 }
             })
             .store(in: &cancellables)
-        
+
         waitForExpectations(timeout: 3)
     }
 }
 
-private extension MarvelCharacterDetailViewModelTests{
+private extension MarvelCharacterDetailViewModelTests {
     func getCharacterMock() -> MarvelCharacter {
         MarvelCharacter(
             identifier: 1,

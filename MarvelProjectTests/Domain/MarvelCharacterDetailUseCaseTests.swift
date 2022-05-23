@@ -9,45 +9,45 @@
 @testable import MarvelProject
 import XCTest
 
-class MarvelCharacterDetailUseCaseTests: XCTestCase{
+class MarvelCharacterDetailUseCaseTests: XCTestCase {
     private var sut: MarvelCharacterDetailUseCase!
-    private var marvelDataRepositoryMock : MarvelDataRepositoryMock!
-    
-    override func setUp(){
+    private var marvelDataRepositoryMock: MarvelDataRepositoryMock!
+
+    override func setUp() {
         super.setUp()
         marvelDataRepositoryMock = MarvelDataRepositoryMock()
         sut = MarvelCharacterDetailUseCase(marvelRepository: marvelDataRepositoryMock)
     }
-    
-    func testInit(){
+
+    func testInit() {
         XCTAssertNotNil(sut)
     }
-    
-    func testExecute() async throws{
+
+    func testExecute() async throws {
         let identifier = 1
         marvelDataRepositoryMock.stubbedGetMarvelCharacterResult = .success(getCharactersMock())
-        
+
         let result = try await marvelDataRepositoryMock.getMarvelCharacter(identifier: identifier)
-        
+
         XCTAssertNotNil(result)
-        switch result{
+        switch result {
         case let .success(character):
             XCTAssertEqual(character, getCharactersMock())
             XCTAssertEqual(marvelDataRepositoryMock.invokedGetMarvelCharacterCount, 1)
-        case .failure(_):
+        case .failure:
             XCTFail("This test must not fail")
         }
     }
-    
-    func testError() async throws{
+
+    func testError() async throws {
         let identifier = 1
         marvelDataRepositoryMock.stubbedGetMarvelCharacterResult = .failure(.httpError(411))
-        
+
         let result = try await marvelDataRepositoryMock.getMarvelCharacter(identifier: identifier)
-        
+
         XCTAssertNotNil(result)
-        switch result{
-        case .success(_):
+        switch result {
+        case .success:
             XCTFail("This test must not fail")
         case let .failure(error):
             XCTAssertEqual(marvelDataRepositoryMock.invokedGetMarvelCharacterCount, 1)
@@ -56,7 +56,7 @@ class MarvelCharacterDetailUseCaseTests: XCTestCase{
     }
 }
 
-private extension MarvelCharacterDetailUseCaseTests{
+private extension MarvelCharacterDetailUseCaseTests {
     func getCharactersMock() -> MarvelCharacter {
         MarvelCharacter(
             identifier: 1,

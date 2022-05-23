@@ -9,72 +9,71 @@ import Combine
 @testable import MarvelProject
 import XCTest
 
-class MarvelDataRepositoryTests : XCTestCase{
+class MarvelDataRepositoryTests: XCTestCase {
     private var sut: MarvelDataRepository!
     private var networkServiceMock: NetworkServiceMock!
-    
+
     override func setUp() {
         super.setUp()
         networkServiceMock = NetworkServiceMock()
         sut = MarvelDataRepository(networkService: networkServiceMock)
     }
-    
-    func testInit(){
+
+    func testInit() {
         XCTAssertNotNil(sut)
     }
-    
-    func testCharacterList() async throws{
+
+    func testCharacterList() async throws {
         // Given
         let marvelResponse = getMarvelResponseMock()
         networkServiceMock.invokedRequestResult = marvelResponse
-        
+
         // When
         let result = try await sut.getMarvelCharacters()
-        
+
         // Then
         XCTAssertNotNil(result)
-        switch result{
+        switch result {
         case let .success(characters):
             XCTAssertEqual(networkServiceMock.invokedRequestCount, 1)
             XCTAssertEqual(characters.count, 2)
-        case .failure(_):
+        case .failure:
             XCTFail("this test must not fail")
         }
-        
     }
-    
-    func testCharacterDetail() async throws{
+
+    func testCharacterDetail() async throws {
         // Given
         let identifier = 1
         let marvelResponse = getMarvelResponseCharacterDetailMock()
         networkServiceMock.invokedRequestResult = marvelResponse
-        
+
         // When
         let result = try await sut.getMarvelCharacter(identifier: identifier)
-        
+
         // Then
         XCTAssertNotNil(result)
-        switch result{
+        switch result {
         case let .success(character):
             XCTAssertEqual(networkServiceMock.invokedRequestCount, 1)
             XCTAssertEqual(character.identifier, identifier)
             XCTAssertEqual(character.name, "test1Detail")
-        case .failure(_):
+        case .failure:
             XCTFail("this test must not fail")
         }
     }
-    
-    func testError() async throws{
+
+    func testError() async throws {
         // Given
         networkServiceMock.invokedRequestError = .httpError(405)
-        
+
         // When
         let result = try await sut.getMarvelCharacters()
-        
+
         // Then
         XCTAssertNotNil(result)
-        switch result{
-        case .success(_):
+        switch result {
+        case .success:
             XCTFail("this test must fail")
         case let .failure(error):
             XCTAssertEqual(error, NetworkError.httpError(405))
@@ -82,8 +81,8 @@ class MarvelDataRepositoryTests : XCTestCase{
     }
 }
 
-private extension MarvelDataRepositoryTests{
-    func getMarvelResponseCharacterDetailMock() -> MarvelResponseDTO{
+private extension MarvelDataRepositoryTests {
+    func getMarvelResponseCharacterDetailMock() -> MarvelResponseDTO {
         MarvelResponseDTO(
             code: 200,
             status: "ok",
