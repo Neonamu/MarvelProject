@@ -219,10 +219,10 @@
 				644B40452833BFC70097BE92 /* Presentation */,
 				64009D372833B97E00F874C5 /* AppDelegate.swift */,
 				64009D392833B97E00F874C5 /* SceneDelegate.swift */,
+				648EB57C283BCCA10057BAEF /* AppDependencies.swift */,
 				64009D402833B97F00F874C5 /* Assets.xcassets */,
 				644B4097283653780097BE92 /* LaunchScreen.storyboard */,
 				64009D452833B97F00F874C5 /* Info.plist */,
-				648EB57C283BCCA10057BAEF /* AppDependencies.swift */,
 			);
 			path = MarvelProject;
 			sourceTree = "<group>";

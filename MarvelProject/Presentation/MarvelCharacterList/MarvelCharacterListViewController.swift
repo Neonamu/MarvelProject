@@ -82,7 +82,7 @@ extension MarvelCharacterListViewController {
             .sink { [weak self] _ in
                 guard let self = self else { return }
                 if !self.viewModel.errorMsg.isEmpty {
-                    self.showMessage(title: "Error", msg: self.viewModel.errorMsg)
+                    self.showMessage(title: MarvelConstants.errorTitle, msg: self.viewModel.errorMsg)
                 }
             }
             .store(in: &cancellables)
