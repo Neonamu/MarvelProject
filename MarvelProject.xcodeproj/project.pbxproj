@@ -75,7 +75,7 @@
 		64E69FE328367F8A002CCD4C /* MarvelCharacterListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64E69FE228367F8A002CCD4C /* MarvelCharacterListCell.xib */; };
 		64E69FE528368037002CCD4C /* MarvelCharacterListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E69FE428368037002CCD4C /* MarvelCharacterListCell.swift */; };
 		64E69FE728368128002CCD4C /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E69FE628368128002CCD4C /* UIImageView.swift */; };
-		64E69FEB283696BC002CCD4C /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E69FEA283696BB002CCD4C /* BaseCoordinator.swift */; };
+		64E69FEB283696BC002CCD4C /* BaseCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E69FEA283696BB002CCD4C /* BaseCoordinatorProtocol.swift */; };
 		64E69FED283696E1002CCD4C /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E69FEC283696E1002CCD4C /* MainCoordinator.swift */; };
 		64E69FEF283696FD002CCD4C /* StartCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E69FEE283696FD002CCD4C /* StartCoordinator.swift */; };
 		64E69FF12836971E002CCD4C /* MarvelCharacterListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E69FF02836971E002CCD4C /* MarvelCharacterListCoordinator.swift */; };
@@ -155,7 +155,7 @@
 		64E69FE228367F8A002CCD4C /* MarvelCharacterListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarvelCharacterListCell.xib; sourceTree = "<group>"; };
 		64E69FE428368037002CCD4C /* MarvelCharacterListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelCharacterListCell.swift; sourceTree = "<group>"; };
 		64E69FE628368128002CCD4C /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
-		64E69FEA283696BB002CCD4C /* BaseCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
+		64E69FEA283696BB002CCD4C /* BaseCoordinatorProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCoordinatorProtocol.swift; sourceTree = "<group>"; };
 		64E69FEC283696E1002CCD4C /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		64E69FEE283696FD002CCD4C /* StartCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartCoordinator.swift; sourceTree = "<group>"; };
 		64E69FF02836971E002CCD4C /* MarvelCharacterListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelCharacterListCoordinator.swift; sourceTree = "<group>"; };
@@ -584,7 +584,7 @@
 		64E69FE9283696BB002CCD4C /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
-				64E69FEA283696BB002CCD4C /* BaseCoordinator.swift */,
+				64E69FEA283696BB002CCD4C /* BaseCoordinatorProtocol.swift */,
 				64E69FEC283696E1002CCD4C /* MainCoordinator.swift */,
 				64E69FEE283696FD002CCD4C /* StartCoordinator.swift */,
 			);
@@ -773,7 +773,7 @@
 				644B408C2836287F0097BE92 /* NetworkEndpointProtocol.swift in Sources */,
 				648EB57B283BCC5D0057BAEF /* DependencyManager.swift in Sources */,
 				644B407928353E4C0097BE92 /* String.swift in Sources */,
-				64E69FEB283696BC002CCD4C /* BaseCoordinator.swift in Sources */,
+				64E69FEB283696BC002CCD4C /* BaseCoordinatorProtocol.swift in Sources */,
 				644B408E28362AC90097BE92 /* NetworkServiceLogger.swift in Sources */,
 				644B4085283628090097BE92 /* NetworkEnvironmentProtocol.swift in Sources */,
 				644B4088283628240097BE92 /* MarvelEnvironment.swift in Sources */,

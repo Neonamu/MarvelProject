@@ -11,7 +11,7 @@ protocol MarvelCharacterListCoordinatorProtocol: AnyObject {
     func coordinateToCharacterDetail(identifier: Int)
 }
 
-final class MarvelCharacterListCoordinator: BaseCoordinator, MarvelCharacterListCoordinatorProtocol {
+final class MarvelCharacterListCoordinator: BaseCoordinatorProtocol, MarvelCharacterListCoordinatorProtocol {
     let navigationController: UINavigationController
 
     init(navigationController: UINavigationController) {

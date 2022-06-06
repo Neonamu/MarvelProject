@@ -11,7 +11,7 @@ protocol MarvelCharacterDetailCoordinatorProtocol: AnyObject {
     func dismiss()
 }
 
-final class MarvelCharacterDetailCoordinator: BaseCoordinator, MarvelCharacterDetailCoordinatorProtocol {
+final class MarvelCharacterDetailCoordinator: BaseCoordinatorProtocol, MarvelCharacterDetailCoordinatorProtocol {
     let navigationController: UINavigationController
     let identifier: Int
 
