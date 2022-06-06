@@ -37,9 +37,9 @@ class MarvelCharacterListCell: UITableViewCell {
     func configure(_ character: MarvelCharacter) {
         self.loadCharacterData(character)
     }
+}
 
-    // MARK: - Private Methods -
-
+private extension MarvelCharacterListCell {
     private func loadCharacterData(_ character: MarvelCharacter) {
         characterImg.image = nil
         if let thumbnail = character.thumbnail,

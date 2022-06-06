@@ -12,6 +12,6 @@ class MarvelConstants {
     public struct Color {
         public static let MarvelRed = UIColor(named: "Marvelred") ?? .red
     }
-    
+
     public static let errorTitle = "Error"
 }

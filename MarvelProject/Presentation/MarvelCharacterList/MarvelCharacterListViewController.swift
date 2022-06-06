@@ -66,6 +66,9 @@ extension MarvelCharacterListViewController {
             tableView.leadingAnchor.constraint(equalTo: safeAreaLayout.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: safeAreaLayout.trailingAnchor)
         ])
+
+        let restart = UIBarButtonItem(title: "Reload", style: .plain, target: self, action: #selector(reloadAllData))
+        navigationItem.rightBarButtonItems = [restart]
     }
 
     private func setupBinding() {
@@ -90,6 +93,10 @@ extension MarvelCharacterListViewController {
 
     private func fetchData() {
         viewModel.fetchCharacters()
+    }
+
+    @objc private func reloadAllData() {
+        viewModel.reloadAllData()
     }
 }
 

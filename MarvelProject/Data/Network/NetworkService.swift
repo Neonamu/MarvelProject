@@ -30,21 +30,24 @@ public final class AsyncAwaitNetworkService: NSObject, AsyncAwaitNetworkServiceP
         guard let session = initializeSession(with: endpoint), let urlRequest = urlRequest(endpoint: endpoint) else {
             throw NetworkError.invalidURL
         }
-
-        let (data, response) = try await session.data(for: urlRequest)
-        logResponseIfNeeded(data: data, response: response)
-        guard let response = response as? HTTPURLResponse else {
-            throw NetworkError.unknown
-        }
-
-        guard (200 ... 299).contains(response.statusCode) else {
-            throw NetworkError.httpError(response.statusCode)
-        }
-
         do {
-            return try JSONDecoder().decode(T.self, from: data)
+            let (data, response) = try await session.data(for: urlRequest)
+            logResponseIfNeeded(data: data, response: response)
+            guard let response = response as? HTTPURLResponse else {
+                throw NetworkError.unknown
+            }
+
+            guard (200 ... 299).contains(response.statusCode) else {
+                throw NetworkError.httpError(response.statusCode)
+            }
+
+            do {
+                return try JSONDecoder().decode(T.self, from: data)
+            } catch {
+                throw NetworkError.decodingError
+            }
         } catch {
-            throw NetworkError.decodingError
+            throw NetworkError.unknown
         }
     }
 
@@ -53,24 +56,27 @@ public final class AsyncAwaitNetworkService: NSObject, AsyncAwaitNetworkServiceP
         guard let session = initializeSession(with: endpoint), let urlRequest = urlRequest(endpoint: endpoint) else {
             throw NetworkError.invalidURL
         }
+        do {
+            let (data, response) = try await session.data(for: urlRequest)
+            logResponseIfNeeded(data: data, response: response)
+            guard let response = response as? HTTPURLResponse else {
+                throw NetworkError.unknown
+            }
 
-        let (data, response) = try await session.data(for: urlRequest)
-        logResponseIfNeeded(data: data, response: response)
-        guard let response = response as? HTTPURLResponse else {
+            guard (200 ... 299).contains(response.statusCode) else {
+                throw NetworkError.httpError(response.statusCode)
+            }
+
+            guard response.value(forHTTPHeaderField: "Content-Type") == "image/png" ||
+                    response.value(forHTTPHeaderField: "Content-Type") == "image/jpg"
+            else {
+                throw NetworkError.decodingError
+            }
+
+            return data
+        } catch {
             throw NetworkError.unknown
         }
-
-        guard (200 ... 299).contains(response.statusCode) else {
-            throw NetworkError.httpError(response.statusCode)
-        }
-
-        guard response.value(forHTTPHeaderField: "Content-Type") == "image/png" ||
-                response.value(forHTTPHeaderField: "Content-Type") == "image/jpg"
-        else {
-            throw NetworkError.decodingError
-        }
-
-        return data
     }
 }
 

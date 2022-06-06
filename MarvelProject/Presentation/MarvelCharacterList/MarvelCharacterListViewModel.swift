@@ -14,6 +14,7 @@ protocol MarvelCharacterListViewModelProtocol {
     var errorMsg: String { get }
     var errorMsgPublisher: Published<String>.Publisher { get }
     func fetchCharacters()
+    func reloadAllData()
 }
 
 
@@ -51,5 +52,13 @@ class MarvelCharacterListViewModel: MarvelCharacterListViewModelProtocol {
                 errorMsg = error.errorDescription
             }
         }
+    }
+
+    func reloadAllData() {
+        offset = 0
+        mustSearch = true
+        dataSource = []
+        errorMsg = ""
+        fetchCharacters()
     }
 }

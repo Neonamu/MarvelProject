@@ -36,8 +36,9 @@ class MarvelComicListCell: UITableViewCell {
     func configure(_ comic: MarvelComicsItem) {
         self.loadComic(comic)
     }
+}
 
-    // MARK: - Private Methods -
+private extension MarvelComicListCell {
     private func loadComic(_ comic: MarvelComicsItem) {
         self.nameLbl?.text = comic.name
     }
